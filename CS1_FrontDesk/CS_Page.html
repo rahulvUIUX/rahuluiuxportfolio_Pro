@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FrontDesk Management System — Case Study | Rahul V</title>
+<link rel="stylesheet" href="CS1_Page.css">
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<nav>
+  <div class="nav-logo">RV</div>
+  <ul class="nav-links">
+    <li><a href="../HomePage.html#hero" class="active">Home</a></li>
+    <li><a href="../HomePage.html#work">Work</a></li>
+    <li><a href="../HomePage.html#about">About</a></li>
+    <li><a href="../HomePage.html#process">Process</a></li>
+    <li><a href="../HomePage.html#experience">Experience</a></li>
+    <li><a href="../HomePage.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <a href="../HomePage.html" class="back-link">← Back to Homepage</a>
+    <p class="eyebrow">CASE STUDY <span class="dot">●</span></p>
+    <h1 class="hero-title">FrontDesk<br>Management System</h1>
+    <p class="hero-sub">Designing a centralized visitor experience for secure and efficient front-desk operations.</p>
+
+    <div class="hero-meta">
+      
+      <div class="meta-item">
+        <span class="meta-icon">▢</span>
+        <div><span class="meta-label">Platform</span><strong>Web Application</strong></div>
+      </div>
+      <div class="meta-item">
+        <span class="meta-icon">◈</span>
+        <div><span class="meta-label">Industry</span><strong>Real Estate / Corporate Ops</strong></div>
+      </div>
+      <div class="meta-item">
+        <span class="meta-icon">✎</span>
+        <div><span class="meta-label">Tools</span><strong>Figma, FigJam</strong></div>
+      </div>
+    </div>
+
+    <div class="hero-visual" id="heroVisual">
+      <!-- Laptop mockup -->
+      <div class="laptop">
+        <div class="laptop-screen">
+          <div class="app-topbar">
+            <span class="app-title">FrontDesk</span>
+            <span class="app-user">Good morning, Receptionist <span class="avatar-dot"></span></span>
+          </div>
+          <div class="app-body">
+            <aside class="app-sidebar">
+              <span class="side-item active">▦ Dashboard</span>
+              <span class="side-item">👤 Visitor Registration</span>
+              <span class="side-item">📅 Appointments</span>
+              <span class="side-item">🪪 Visitor Register</span>
+              <span class="side-item">✅ Check-in / Check-out</span>
+              <span class="side-item">👥 Visitors</span>
+              <span class="side-item">📊 Reports</span>
+              <span class="side-item">⚙ Settings</span>
+            </aside>
+            <main class="app-main">
+              <p class="app-section-title">Today's Overview</p>
+              <div class="app-stats">
+                <div class="app-stat"><small>Total Visitors Today</small><strong>128</strong></div>
+                <div class="app-stat"><small>Checked-in</small><strong>96</strong></div>
+                <div class="app-stat"><small>Checked-out</small><strong>32</strong></div>
+                <div class="app-stat"><small>Expected Today</small><strong>45</strong></div>
+              </div>
+              <div class="app-charts">
+                <div class="app-chart-card">
+                  <small>Visitor Check-in Overview</small>
+                  <svg viewBox="0 0 200 70" class="line-chart" preserveAspectRatio="none">
+                    <polyline points="0,55 25,40 50,45 75,20 100,35 125,15 150,30 175,10 200,25" />
+                  </svg>
+                </div>
+                <div class="app-chart-card donut-card">
+                  <small>Visitors by Type</small>
+                  <svg viewBox="0 0 42 42" class="donut">
+                    <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#e6ebf5" stroke-width="6"/>
+                    <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#3b5bfd" stroke-width="6" stroke-dasharray="40 60" stroke-dashoffset="25"/>
+                    <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#2c9b5f" stroke-width="6" stroke-dasharray="30 70" stroke-dashoffset="-15"/>
+                    <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#f5a623" stroke-width="6" stroke-dasharray="15 85" stroke-dashoffset="-45"/>
+                    <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#e0468b" stroke-width="6" stroke-dasharray="15 85" stroke-dashoffset="-60"/>
+                  </svg>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+        <div class="laptop-base"></div>
+      </div>
+
+      <!-- Phone mockup -->
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-brand">▣ SUMACHURA</div>
+          <p class="phone-visitor-label">VISITOR</p>
+          <div class="phone-avatar"></div>
+          <p class="phone-name">Rahul Sharma</p>
+          <p class="phone-visiting">Visiting<br><strong>Amit Kumar</strong></p>
+          <p class="phone-purpose">Business Meeting</p>
+          <div class="phone-qr">
+            <svg viewBox="0 0 60 60"><rect width="60" height="60" fill="#fff"/>
+              <g fill="#111">
+                <rect x="4" y="4" width="14" height="14"/><rect x="42" y="4" width="14" height="14"/><rect x="4" y="42" width="14" height="14"/>
+                <rect x="8" y="8" width="6" height="6" fill="#fff"/><rect x="46" y="8" width="6" height="6" fill="#fff"/><rect x="8" y="46" width="6" height="6" fill="#fff"/>
+                <rect x="22" y="4" width="4" height="4"/><rect x="30" y="4" width="4" height="4"/><rect x="22" y="12" width="4" height="4"/>
+                <rect x="34" y="14" width="4" height="4"/><rect x="26" y="22" width="4" height="4"/><rect x="34" y="22" width="4" height="4"/>
+                <rect x="4" y="22" width="4" height="4"/><rect x="12" y="26" width="4" height="4"/><rect x="22" y="30" width="4" height="4"/>
+                <rect x="30" y="30" width="4" height="4"/><rect x="42" y="26" width="4" height="4"/><rect x="50" y="22" width="4" height="4"/>
+                <rect x="22" y="42" width="4" height="4"/><rect x="30" y="46" width="4" height="4"/><rect x="42" y="42" width="4" height="4"/>
+                <rect x="50" y="50" width="4" height="4"/><rect x="34" y="50" width="4" height="4"/>
+              </g>
+            </svg>
+          </div>
+          <p class="phone-status">✓ Checked-in</p>
+          <p class="phone-time">08:45 AM, 6 May 2024</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT + STATS ============ -->
+<section class="section about-section">
+  <div class="wrap two-col-40-60">
+    <div class="card about-card">
+      <p class="label">ABOUT THE PROJECT</p>
+      <p>The FrontDesk Management System digitizes and streamlines reception operations across multiple office locations.</p>
+      <p>It enables secure visitor registration, real-time tracking, employee notifications, visitor pass generation, and automated reporting.</p>
+      
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <span class="stat-icon">🎯</span>
+        <strong>40%</strong>
+        <p>Improved front-desk operational efficiency</p>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">📈</span>
+        <strong>60%</strong>
+        <p>Increase in lead capture via streamlined journey</p>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">🗒</span>
+        <strong>20%</strong>
+        <p>Reduction in manual process &amp; cost</p>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">🛡</span>
+        <strong>100%</strong>
+        <p>Centralized visibility across locations</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEM / SOLUTION ============ -->
+<section class="section">
+  <div class="wrap three-col-problem">
+    <div>
+      <p class="label">THE PROBLEM</p>
+      <ul class="check-list problem">
+        <li>Manual and fragmented reception processes</li>
+        <li>Need for reliable visitor verification</li>
+        <li>Difficulty tracking visitors throughout their visit</li>
+        <li>Need for faster visitor registration</li>
+        <li>Need to notify the employee being visited</li>
+        <li>Limited centralized visibility for management</li>
+        <li>Need to standardize operations across multiple locations</li>
+      </ul>
+    </div>
+    <div>
+      <p class="label">THE SOLUTION</p>
+      <ul class="check-list solution">
+        <li>Digitized and standardized FrontDesk operations across locations</li>
+        <li>Track visitors from entry to exit</li>
+        <li>Verify visitors using OTP authentication</li>
+        <li>Generate visitor passes after successful verification</li>
+        <li>Support receptionist-assisted and QR-code self check-in</li>
+        <li>Automate employee notifications</li>
+        <li>Provide centralized visitor data and analytical reports</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ USERS & STAKEHOLDERS ============ -->
+<section class="section">
+  <div class="wrap">
+    <p class="label">USERS &amp; STAKEHOLDERS</p>
+    <div class="user-grid">
+      <div class="user-card">
+        <span class="user-icon">👤</span>
+        <strong>Receptionist</strong>
+        <p>Manages visitor check-in / check-out, appointments, visitor register, and visitor pass generation.</p>
+      </div>
+      <div class="user-card">
+        <span class="user-icon">📊</span>
+        <strong>Report Viewer</strong>
+        <p>Accesses reports, exports data and analyzes visitor information.</p>
+      </div>
+      <div class="user-card">
+        <span class="user-icon">🧑‍💼</span>
+        <strong>Management</strong>
+        <p>Views dashboards, KPIs and operational reports.</p>
+      </div>
+      <div class="user-card">
+        <span class="user-icon">🙋</span>
+        <strong>Visitor</strong>
+        <p>Provides information, completes verification and receives visitor pass.</p>
+      </div>
+      <div class="user-card">
+        <span class="user-icon">🔔</span>
+        <strong>Employee / Host</strong>
+        <p>Receives notification when the visitor checks in.</p>
+      </div>
+      <div class="user-card">
+        <span class="user-icon">👥</span>
+        <strong>Business &amp; Ops Teams</strong>
+        <p>Define requirements and monitor the effectiveness of the system.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ USER FLOW ============ -->
+<section class="section">
+  <div class="wrap">
+    <p class="label">USER FLOW — VISITOR CHECK-IN JOURNEY</p>
+    <div class="project-flow">
+      <div class="header">
+        <div class="subtitle">PROJECT FLOW</div>
+      </div>
+      <div class="flow-wrapper">
+        <div class="flow">
+          <div class="timeline"></div>
+          <div class="step blue">
+            <div class="number">01</div>
+            <div class="icon-circle">🚪</div>
+            <div class="step-title">Visitor Arrival</div>
+          </div>
+          <div class="arrow"></div>
+          <div class="step teal">
+            <div class="number">02</div>
+            <div class="icon-circle">📋</div>
+            <div class="step-title">Visitor Registration</div>
+          </div>
+          <div class="arrow"></div>
+          <div class="step green">
+            <div class="number">03</div>
+            <div class="icon-circle">🛡️</div>
+            <div class="step-title">Visitor Verification</div>
+          </div>
+          <div class="arrow"></div>
+          <div class="step purple">
+            <div class="number">04</div>
+            <div class="icon-circle">👤</div>
+            <div class="step-title">Select Whom to Meet</div>
+          </div>
+          <div class="arrow"></div>
+          <div class="step orange">
+            <div class="number">05</div>
+            <div class="icon-circle">✉️</div>
+            <div class="step-title">Employee Notification</div>
+          </div>
+          <div class="arrow"></div>
+          <div class="step pink">
+            <div class="number">06</div>
+            <div class="icon-circle">🪪</div>
+            <div class="step-title">Visitor Pass Generation</div>
+          </div>
+          <div class="arrow"></div>
+          <div class="step navy">
+            <div class="number">07</div>
+            <div class="icon-circle">🤝</div>
+            <div class="step-title">Visitor Meeting</div>
+          </div>
+          <div class="arrow"></div>
+          <div class="step red-orange">
+            <div class="number">08</div>
+            <div class="icon-circle">🚪</div>
+            <div class="step-title">Visitor Check-Out</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KEY SCREENS ============ -->
+<section class="section">
+  <div class="wrap">
+    <p class="label">KEY SCREENS</p>
+    <div class="screens-grid">
+      <figure class="screen-thumb dashboard-thumb"><figcaption>Dashboard</figcaption></figure>
+      <figure class="screen-thumb registration-thumb"><figcaption>Visitor Registration</figcaption></figure>
+      <figure class="screen-thumb otp-thumb"><figcaption>OTP Verification</figcaption></figure>
+      <figure class="screen-thumb preview-thumb"><figcaption>Preview Information</figcaption></figure>
+      <figure class="screen-thumb pass-thumb"><figcaption>Visitor Pass</figcaption></figure>
+      <figure class="screen-thumb reports-thumb"><figcaption>Reports</figcaption></figure>
+    </div>
+    <a href="#prototype" class="btn btn-outline btn-sm prototype-btn">View Full Prototype ↗</a>
+  </div>
+</section>
+
+<!-- ============ DESIGN SYSTEM + PRINCIPLES ============ -->
+<section class="section">
+  <div class="wrap two-col-45-55">
+    <div class="card design-system-card">
+      <p class="label">DESIGN SYSTEM</p>
+      <small class="muted">Built for consistency &amp; scalability</small>
+
+      <p class="ds-subhead">Colors</p>
+      <div class="swatches">
+        <span class="swatch" style="background:#3b5bfd"></span>
+        <span class="swatch" style="background:#1c2b6b"></span>
+        <span class="swatch" style="background:#2c9b5f"></span>
+        <span class="swatch" style="background:#f5a623"></span>
+        <span class="swatch" style="background:#e0468b"></span>
+        <span class="swatch" style="background:#d9dee8"></span>
+        <span class="swatch swatch-outline" style="background:#fff"></span>
+      </div>
+
+      <p class="ds-subhead">Typography</p>
+      <div class="type-sample">
+        <span class="aa">Aa</span>
+        <div class="type-weights">
+          <small>Inter</small>
+          <div><span>Regular</span><span>Medium</span><span>Semibold</span><span>Bold</span></div>
+        </div>
+      </div>
+
+      <p class="ds-subhead">Components</p>
+      <div class="component-row">
+        <button class="btn btn-primary">Primary Button</button>
+        <button class="btn btn-outline">Secondary Button</button>
+      </div>
+      <div class="component-row">
+        <div class="fake-input">Input Field <span>⌄</span></div>
+        <div class="fake-input">Dropdown <span>⌄</span></div>
+        <label class="fake-checkbox"><input type="checkbox" checked disabled> Checkbox</label>
+      </div>
+    </div>
+
+    <div class="card principles-card">
+      <p class="label">Design Principles</p>
+      <div class="principles-grid">
+        <div class="principle"><span>🔗</span><p>Simple &amp; Clear</p></div>
+        <div class="principle"><span>◎</span><p>Consistent</p></div>
+        <div class="principle"><span>🛡</span><p>Secure</p></div>
+        <div class="principle"><span>⏱</span><p>Efficient</p></div>
+        <div class="principle"><span>◆</span><p>Accessible</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IMPACT ============ -->
+<section class="section">
+  <div class="wrap">
+    <p class="label">IMPACT</p>
+    <div class="impact-grid">
+      <div class="impact-card"><span>👥</span><strong>40%</strong><p>Improved operational efficiency</p></div>
+      <div class="impact-card"><span>📈</span><strong>60%</strong><p>Increase in lead capture</p></div>
+      <div class="impact-card"><span>⚙</span><strong>20%</strong><p>Reduction in manual process &amp; cost</p></div>
+      <div class="impact-card"><span>🛡</span><strong>100%</strong><p>Centralized visibility across locations</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEARNED + QUOTE ============ -->
+<section class="section">
+  <div class="wrap two-col-45-55">
+    <div class="card learned-card">
+      <p class="label">WHAT I LEARNED</p>
+      <ul class="learned-list">
+        <li>Importance of end-to-end user journey mapping</li>
+        <li>Designing for multiple user roles &amp; permissions</li>
+        <li>Balancing security, simplicity &amp; efficiency</li>
+        <li>Iterative design with stakeholder collaboration</li>
+      </ul>
+    </div>
+    <blockquote class="quote-card">
+      <p>"Good design is not just about how it looks, but how effortlessly it solves real problems."</p>
+      <div class="quote-author">
+        <div class="quote-avatar"></div>
+        <div>
+          <strong>Rahul V</strong>
+          <small>Product Designer</small>
+        </div>
+        <div class="quote-socials"><span>in</span><span>◐</span><span>✉</span></div>
+      </div>
+    </blockquote>
+  </div>
+</section>
+
+
+
+<script src="CS1_Page.js"></script>
+</body>
+</html>
