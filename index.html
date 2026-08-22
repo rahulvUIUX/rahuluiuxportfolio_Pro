@@ -80,7 +80,10 @@
     border-bottom: 1px solid var(--border);
   }
   .nav-logo { font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
-  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 36px; list-style: none; white-space: nowrap;
+  }
   .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
   .nav-links a:hover { color: var(--text); }
   .nav-links a.active { color: var(--text); }
@@ -88,9 +91,10 @@
     display: flex; align-items: center; gap: 12px;
   }
   .btn-talk {
-    background: var(--accent); color: #fff; border: none; padding: 9px 20px; border-radius: 40px;
-    font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s;
+    background: var(--accent); color: #fff; border: none; padding: 9px 20px; border-radius: 10px;
+    font-size: 0.875rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: opacity 0.2s;
   }
+  .nav-cta .btn-talk, .nav-cta .btn-talk:hover { color: #fff; }
   .btn-talk:hover { opacity: 0.85; }
   .theme-btn {
     width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border);
@@ -111,7 +115,14 @@
     background: radial-gradient(circle, rgba(124,92,252,0.22) 0%, transparent 70%);
     pointer-events: none;
   }
-  .hero-content { max-width: 600px; z-index: 2; }
+  .hero-content { max-width: 900px; z-index: 2; }
+  .hero-image {
+    position: absolute; right: 40px; top: 50%; transform: translateY(calc(-50% + 34px));
+    width: min(50vw, 620px); height: 800px; z-index: 1;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .hero-image img { width: 100%; height: 100%; display: block; object-fit: contain; object-position: center center; }
   .hero-eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
     font-size: 1.125rem; font-weight: 600; color: var(--accent-soft);
@@ -119,12 +130,13 @@
   }
   .hero-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--accent); border-radius: 2px; }
   .hero-h1 {
-    font-family: var(--font-display); font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-family: var(--font-display); font-size: clamp(2.3rem, 4vw, 3.4rem);
     font-weight: 800; line-height: 1.05; letter-spacing: -0.03em;
     color: var(--text); margin-bottom: 20px;
   }
-  .hero-h1 span { color: var(--accent-soft); }
-  .hero-desc { font-size: 1.05rem; color: var(--muted); max-width: 480px; margin-bottom: 36px; line-height: 1.75; }
+  .hero-h1 .hero-lead { color: var(--text); white-space: nowrap; }
+  .hero-h1 .hero-highlight { color: var(--accent-soft); }
+  .hero-desc { font-size: 1.05rem; color: var(--muted); max-width: 800px; margin-bottom: 36px; line-height: 1.75; }
   .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 44px; }
   .btn-primary {
     background: var(--accent); color: #fff; padding: 14px 28px;
@@ -148,6 +160,11 @@
     color: #fff;
     box-shadow: 0 8px 20px rgba(124,92,252,0.25);
   }
+  .hero-download:hover {
+    background:#7c5cfc;
+    border-color: #7c5cfc;
+    color: #fff;
+  }
   .btn-secondary:active {
     background: var(--accent);
     color: #fff;
@@ -168,6 +185,7 @@
   }
   .hero-stat-card .num { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; color: var(--text); }
   .hero-stat-card .label { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+  #featured { display: none; }
 
   /* TRUST BAR */
   .trust-bar {
@@ -281,13 +299,7 @@
   .highlight-num { font-family: var(--font-display); font-size: 1.7rem; font-weight: 800; color: var(--text); }
   .highlight-label { font-size: 0.73rem; color: var(--muted); margin-top: 4px; }
 
-  /* DESIGN PROCESS */
-  .process-steps { display: grid; grid-template-columns: repeat(7, 1fr); gap: 16px; margin-top: 56px; }
-  .process-step { text-align: center; position: relative; }
-  .process-step:not(:last-child)::after {
-    content: ''; position: absolute; top: 24px; right: -8px;
-    width: 16px; height: 1px; background: var(--border);
-  }
+  
   .step-icon {
     width: 48px; height: 48px; border-radius: 50%;
     background: var(--card); border: 1px solid var(--border);
@@ -450,6 +462,12 @@
   @media (max-width: 900px) {
     nav { padding: 0 24px; }
     .nav-links { display: none; }
+    .hero { flex-direction: column; justify-content: center; padding-top: 100px; padding-bottom: 48px; }
+    .hero-content { max-width: 100%; }
+    .hero-h1 .hero-lead { white-space: normal; }
+    .hero-image { position: relative; right: auto; top: auto; transform: none; width: min(100%, 360px); height: 360px; margin: 36px auto 0; order: 2; }
+    .hero-content { max-width: 100%; }
+    .hero-h1 .hero-lead { white-space: normal; }
     .hero { padding: 0 24px; padding-top: 68px; }
     .hero-stats { display: none; }
     section { padding: 70px 24px; }
@@ -480,11 +498,11 @@
     <li><a href="#hero" class="active">Home</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#process">Process</a></li>
     <li><a href="#experience">Experience</a></li>
-    <li><a href="#contact">Contact</a></li>
   </ul>
-  
+  <div class="nav-cta">
+    <a href="Homepage/source/Rahul_6374761540.pdf" download="rahul_6374761540.pdf" class="btn-talk">Download Resume</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -494,31 +512,20 @@
     <div class="hero-eyebrow">
       <span id="typewriter"></span><span class="cursor">|</span>  
     </div>
-    <h1 class="hero-h1">Designing products that <span>people love</span></h1>
-    <p class="hero-desc">UI/UX & Product Designer with 2+ years of experience building intuitive digital experiences that solve real user problems and drive business impact.</p>
+    <h1 class="hero-h1"><span class="hero-lead">Product Designer turning complex</span><br><span class="hero-highlight">problems into simple, useful experiences.</span></h1>
+    <p class="hero-desc">I'm a Product Designer with 2+ years of experience designing digital products across UX research, interaction design and UI systems.</p>
+    <p class="hero-desc">I enjoy understanding messy problems, finding the right user needs, and turning them into clear experiences that work for both people and businesses.</p>
     <div class="hero-actions">
       <a href="#work" class="btn-primary">View Case Studies →</a>
-      <a href="Homepage/source/Rahul_6374761540.pdf" download="rahul_6374761540.pdf" class="btn-secondary">  Download Resume ⬇
+      <a href="Homepage/source/Rahul_6374761540.pdf" download="rahul_6374761540.pdf" class="btn-secondary hero-download">  Download Resume
 </a>
     </div>
     <div class="hero-meta">
-      <div class="hero-meta-item">📍 India</div>
-      <div class="hero-meta-item"><span class="dot"></span> Available for Work</div>
+      <div class="hero-meta-item"><span class="dot"></span> Available for Product Design opportunities</div>
     </div>
   </div>
-  <div class="hero-stats">
-    <div class="hero-stat-card">
-      <div class="num">2+</div>
-      <div class="label">Years Experience</div>
-    </div>
-    <div class="hero-stat-card">
-      <div class="num">20+</div>
-      <div class="label">Projects Completed</div>
-    </div>
-    <div class="hero-stat-card">
-      <div class="num">Available</div>
-      <div class="label">For Work</div>
-    </div>
+  <div class="hero-image">
+    <img src="Homepage/source/Banner2.png" alt="Rahul, Product Designer">
   </div>
 </section>
 
@@ -528,10 +535,9 @@
   <div class="trust-divider"></div>
   
   <div class="trust-stats">
-    <div class="trust-stat"><div class="n">20+</div><div class="l">Projects</div></div>
-    <div class="trust-stat"><div class="n">15+</div><div class="l">Happy Users</div></div>
+    <div class="trust-stat"><div class="n">15+</div><div class="l">Research Participants</div></div>
     <div class="trust-stat"><div class="n">2+</div><div class="l">Years Experience</div></div>
-    <div class="trust-stat"><div class="n">98%</div><div class="l">Users Satisfaction</div></div>
+    <div class="trust-stat"><div class="n">34+</div><div class="l">No of Project Worked</div></div>
   </div>
 </div>
 
@@ -546,11 +552,14 @@
         <span class="tag">CRM</span>
       </div>
       <h2 class="case-title">Real Estate CRM Platform</h2>
-      <p class="case-desc">A comprehensive CRM platform designed for real estate agents to manage leads, properties, and communication in one place.</p>
+      <p class="case-desc">Real estate professionals were managing leads, properties and communication across disconnected workflows. I designed a CRM experience that brought these activities into one clearer, more efficient workflow.</p>
+      <p class="case-desc"><strong>My role:</strong> UX Research, Information Architecture, User Flows, Interaction Design, UI Design and Prototyping.</p>
+      <p class="case-desc"><strong>The challenge:</strong> How might we help real estate teams understand their pipeline, prioritise follow-ups and manage customer information without increasing cognitive load?</p>
+      <p class="case-desc"><strong>Process:</strong> Research → Workflow Mapping → Information Architecture → Wireframes → Interaction Design → Prototype → Usability Testing → Final UI</p>
       <div class="case-metrics">
-        <div class="metric"><div class="pct">35%</div><div class="desc">Increase in Lead<br>Conversion</div></div>
-        <div class="metric"><div class="pct">40%</div><div class="desc">Reduction in<br>Onboarding Time</div></div>
-        <div class="metric"><div class="pct">25%</div><div class="desc">Improvement in Team<br>Productivity</div></div>
+        <div class="metric"><div class="pct">35%</div><div class="desc">Projected increase<br>in conversion</div></div>
+        <div class="metric"><div class="pct">40%</div><div class="desc">Projected reduction<br>in onboarding time</div></div>
+        <div class="metric"><div class="pct">25%</div><div class="desc">Projected improvement<br>in productivity</div></div>
       </div>
       <a href="#" class="btn-outline">View Case Study ↗</a>
     </div>
@@ -602,9 +611,11 @@
   <div class="section-row">
     <div>
       <span class="section-eyebrow">Selected Work</span>
+      <h2 class="section-title">Designing products around real problems</h2>
     </div>
     <a href="#" class="view-all">View All Projects →</a>
   </div>
+  <p class="case-desc" style="max-width:620px;margin-top:-28px;margin-bottom:36px;">I focus on understanding the problem before designing the interface — from research and user flows to interaction design, prototyping and validation.</p>
   <div class="work-grid">
     <div class="work-card" role="button" tabindex="0" onclick="window.open('CS1_FrontDesk/CS_Page.html', '_blank', 'noopener,noreferrer')" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); window.open('CS1_FrontDesk/CS_Page.html', '_blank', 'noopener,noreferrer'); }" style="cursor:pointer;">
       <div class="work-thumb blue">
@@ -620,8 +631,8 @@
         </div>
       </div>
       <div class="work-info">
-        <div class="work-name">Frontdesk</div>
-        <div class="work-type">Check-in</div>
+        <div class="work-name">01 — Real Estate CRM Platform</div>
+        <div class="work-type">Product Design · B2B SaaS · UX/UI</div>
       </div>
     </div>
     <div class="work-card">
@@ -634,8 +645,8 @@
         </div>
       </div>
       <div class="work-info">
-        <div class="work-name">Coming soon</div>
-        <div class="work-type">Case Study under development</div>
+        <div class="work-name">02 — [Project Name]</div>
+        <div class="work-type">Product Design · [Industry] · [Platform]</div>
       </div>
     </div>
     <div class="work-card">
@@ -651,8 +662,8 @@
         </div>
       </div>
       <div class="work-info">
-        <div class="work-name">Coming Soon</div>
-        <div class="work-type">Case Study under development</div>
+        <div class="work-name">03 — [Project Name]</div>
+        <div class="work-type">UX/UI · [Industry] · [Platform]</div>
       </div>
     </div>
     <div class="work-card">
@@ -664,46 +675,46 @@
         </div>
       </div>
       <div class="work-info">
-        <div class="work-name">Coming Soon</div>
-        <div class="work-type">Case Study under development</div>
+        <div class="work-name">Additional project</div>
+        <div class="work-type">Case study under development</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PORTFOLIO HIGHLIGHTS -->
+<!-- DESIGN IMPACT -->
 <div class="highlights-bar">
-  <span class="section-eyebrow highlights-eyebrow">Portfolio Highlights</span>
+  <span class="section-eyebrow highlights-eyebrow">Design Impact</span>
   <div class="highlights-grid">
     <div class="highlight-card">
       <div class="highlight-icon">🎨</div>
-      <div class="highlight-num">20+</div>
-      <div class="highlight-label">Projects Completed</div>
+      <div class="highlight-num">2+</div>
+      <div class="highlight-label">Years of professional design experience</div>
     </div>
     <div class="highlight-card">
       <div class="highlight-icon">📱</div>
-      <div class="highlight-num">100+</div>
-      <div class="highlight-label">Screens Designed</div>
+      <div class="highlight-num">3+</div>
+      <div class="highlight-label">End-to-end product projects</div>
     </div>
     <div class="highlight-card">
       <div class="highlight-icon">🗺</div>
       <div class="highlight-num">15+</div>
-      <div class="highlight-label">User Flows</div>
+      <div class="highlight-label">Users and participants engaged through research or testing</div>
     </div>
     <div class="highlight-card">
       <div class="highlight-icon">📋</div>
-      <div class="highlight-num">10+</div>
-      <div class="highlight-label">End-to-End Case Studies</div>
+      <div class="highlight-num">100+</div>
+      <div class="highlight-label">Screens and product states designed</div>
     </div>
     <div class="highlight-card">
       <div class="highlight-icon">💜</div>
-      <div class="highlight-num">50+</div>
-      <div class="highlight-label">Happy Clients</div>
+      <div class="highlight-num">Multiple</div>
+      <div class="highlight-label">Cross-functional collaborations</div>
     </div>
     <div class="highlight-card">
       <div class="highlight-icon">⭐</div>
-      <div class="highlight-num">98%</div>
-      <div class="highlight-label">Client Satisfaction</div>
+      <div class="highlight-num">Focus</div>
+      <div class="highlight-label">What I bring to a product team</div>
     </div>
   </div>
 </div>
@@ -722,20 +733,21 @@
     </div>
     <div class="about-text">
       <h2 class="section-title" style="margin-bottom:18px;">Hi, I'm Rahul.V 👋</h2>
-      <p>I'm a Product Designer who loves turning complex problems into simple, beautiful and user-friendly experiences. I enjoy working at the intersection of user needs and business goals.</p>
-      <p>With a strong foundation in UX research, interaction design, and visual design, I create products that are intuitive, accessible and impactful.</p>
+      <p>I'm a Product Designer who enjoys turning complex workflows into clear, intuitive experiences.</p>
+      <p>My approach combines user research, interaction design and visual systems. I like getting close to the problem, understanding what users are actually trying to accomplish, and working with product and engineering teams to turn those insights into practical solutions.</p>
+      <p>I'm particularly interested in products where good design can simplify complicated workflows, improve usability and create measurable business value.</p>
       <div class="about-badges">
         <span class="badge">Problem Solver</span>
         <span class="badge">User Focused</span>
         <span class="badge">Detail Oriented</span>
         <span class="badge">Team Player</span>
       </div>
-      <a href="#" class="btn-primary" style="display:inline-flex;">Download Resume ↓</a>
+  
     </div>
     <div class="about-meta">
       <div class="meta-row"><span class="meta-key">📍 Location</span><span class="meta-val">India</span></div>
       <div class="meta-row"><span class="meta-key">⏱ Experience</span><span class="meta-val">2+ Years</span></div>
-      <div class="meta-row"><span class="meta-key">✉ Email</span><span class="meta-val">rahuluiux@gmail.com</span></div>
+      <div class="meta-row"><span class="meta-key">✉ Email</span><span class="meta-val">rahuluiux010@gmail.com</span></div>
       <div class="meta-row"><span class="meta-key">🌐 Languages</span><span class="meta-val">English </span></div>
       <div class="meta-row"><span class="meta-key">✅ Availability</span><span class="meta-val avail">Open to Opportunities</span></div>
     </div>
@@ -751,46 +763,47 @@
       </div>
       <div class="skill-cols-inner">
         <div class="skill-category">
-          <div class="skill-cat-title">UX Research</div>
+          <div class="skill-cat-title">Research</div>
           <div class="skill-list">
             <span class="skill-item">User Research</span>
-            <span class="skill-item">Persona</span>
+            <span class="skill-item">User Interviews</span>
+            <span class="skill-item">Competitive Analysis</span>
             <span class="skill-item">Journey Mapping</span>
             <span class="skill-item">Usability Testing</span>
           </div>
         </div>
         <div class="skill-category">
-          <div class="skill-cat-title">UI Design</div>
+          <div class="skill-cat-title">Product Thinking</div>
+          <div class="skill-list">
+            <span class="skill-item">Problem Framing</span>
+            <span class="skill-item">User Flows</span>
+            <span class="skill-item">Information Architecture</span>
+            <span class="skill-item">Prioritisation</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-cat-title">Interaction</div>
           <div class="skill-list">
             <span class="skill-item">Wireframing</span>
-            <span class="skill-item">Visual Design</span>
-            <span class="skill-item">Design Systems</span>
-            <span class="skill-item">Prototyping</span>
-          </div>
-        </div>
-        <div class="skill-category">
-          <div class="skill-cat-title">Product Design</div>
-          <div class="skill-list">
-            <span class="skill-item">Product Thinking</span>
-            <span class="skill-item">Information Architecture</span>
-            <span class="skill-item">User Flow</span>
             <span class="skill-item">Interaction Design</span>
+            <span class="skill-item">Prototyping</span>
+            <span class="skill-item">Design Systems</span>
           </div>
         </div>
         <div class="skill-category">
-          <div class="skill-cat-title">Soft Skills</div>
+          <div class="skill-cat-title">UI</div>
           <div class="skill-list">
-            <span class="skill-item">Communication</span>
-            <span class="skill-item">Problem Solving</span>
-            <span class="skill-item">Collaboration</span>
-            <span class="skill-item">Stakeholder Management</span>
+            <span class="skill-item">Visual Design</span>
+            <span class="skill-item">Responsive Design</span>
+            <span class="skill-item">Accessibility</span>
+            <span class="skill-item">Component Design</span>
           </div>
         </div>
       </div>
     </div>
     <div>
       <div class="section-row" style="margin-bottom:24px;">
-        <span class="skills-group-title">Tools & Expertise</span>
+          <span class="skills-group-title">Tools</span>
       </div>
       <div class="tools-grid">
         <div class="tool-row">
@@ -802,37 +815,23 @@
         </div>
         <div class="tool-row">
           <div class="tool-icon" style="background:#1E1E2E;color:#FF61F6;font-size:0.7rem;">XD</div>
-          <span class="tool-name">Adobe XD</span>
+          <span class="tool-name">Adobe Photoshop</span>
           <div class="tool-dots">
             <div class="dot-filled"></div><div class="dot-filled"></div><div class="dot-filled"></div><div class="dot-empty"></div><div class="dot-empty"></div>
           </div>
         </div>
         <div class="tool-row">
           <div class="tool-icon" style="background:#0a2a1a;color:#3AB795;font-size:0.7rem;">No</div>
-          <span class="tool-name">Adobe Photoshop</span>
+          <span class="tool-name">Adobe Illustrator</span>
           <div class="tool-dots">
             <div class="dot-filled"></div><div class="dot-filled"></div><div class="dot-filled"></div><div class="dot-filled"></div><div class="dot-filled"></div>
           </div>
         </div>
         <div class="tool-row">
           <div class="tool-icon" style="background:#0d1a2a;color:#0052CC;font-size:0.7rem;">Ji</div>
-          <span class="tool-name">Adobe premiere Pro</span>
+          <span class="tool-name">Adobe Premiere Pro</span>
           <div class="tool-dots">
             <div class="dot-filled"></div><div class="dot-filled"></div><div class="dot-filled"></div><div class="dot-empty"></div><div class="dot-empty"></div>
-          </div>
-        </div>
-        <div class="tool-row">
-          <div class="tool-icon" style="background:#0d1e30;color:#4353FF;font-size:0.6rem;">Wf</div>
-          <span class="tool-name">Canva</span>
-          <div class="tool-dots">
-            <div class="dot-filled"></div><div class="dot-filled"></div><div class="dot-filled"></div><div class="dot-filled"></div><div class="dot-empty"></div>
-          </div>
-        </div>
-        <div class="tool-row">
-          <div class="tool-icon" style="background:#1a1000;color:#FF9A00;font-size:0.6rem;">Ai</div>
-          <span class="tool-name">Illustrator</span>
-          <div class="tool-dots">
-            <div class="dot-filled"></div><div class="dot-filled"></div><div class="dot-empty"></div><div class="dot-empty"></div><div class="dot-empty"></div>
           </div>
         </div>
       </div>
@@ -846,31 +845,31 @@
   <div class="exp-grid">
     <div class="exp-card">
       <div class="exp-icon">🏢</div>
-      <div class="exp-role">UI UX Designer</div>
+      <div class="exp-role">UI/UX Designer</div>
       <div class="exp-company">Sumadhura Infracon Pvt Ltd</div>
       <div class="exp-period">2024 - Present</div>
-      <div class="exp-desc">Sove the challenges of designing intuitive user experiences for enterprise software.</div>
+      <div class="exp-desc">Designing and improving digital experiences across enterprise software.</div>
     </div>
     <div class="exp-card">
       <div class="exp-icon">✦</div>
       <div class="exp-role">Graphics Designer Intern</div>
       <div class="exp-company">2Gethr</div>
       <div class="exp-period">Aug 2023 - Dec 2023</div>
-      <div class="exp-desc">Designed graphics for various marketing materials and social media platforms.</div>
+      <div class="exp-desc">Created digital and marketing experiences across visual communication projects.</div>
     </div>
     <div class="exp-card">
       <div class="exp-icon">🎨</div>
       <div class="exp-role">Professional UI UX Designer Course</div>
       <div class="exp-company">DesignBoat</div>
-      <div class="exp-period">Jan 2023 – Feb 2024</div>
-      <div class="exp-desc">Completed comprehensive coursework in UI/UX design principles and practices with a focus on real-world applications.</div>
+      <div class="exp-period">2023</div>
+      <div class="exp-desc">Completed professional coursework in UI/UX design principles and real-world product design practices.</div>
     </div>
     <div class="exp-card">
       <div class="exp-icon">🎓</div>
       <div class="exp-role">B.E Computer Science & Engineering</div>
       <div class="exp-company">MIET Engineering College</div>
       <div class="exp-period">2019 – 2023</div>
-      <div class="exp-desc">Learning the fundamentals of computer science, programming, and software development while also exploring design and user experience concepts.</div>
+      <div class="exp-desc">Built a foundation in computer science, programming and software development while exploring design and user experience.</div>
     </div>
   </div>
 </section>
@@ -880,12 +879,12 @@
 <!-- CTA -->
 <div class="cta-section" id="contact">
   <div>
-    <div class="cta-title">Let's build something<br>amazing together 🚀</div>
-    <p class="cta-sub">I'm currently available for new opportunities. Let's connect and discuss how I can help your team create amazing products.</p>
+    <div class="cta-title">Let's solve something<br>worth solving.</div>
+    <p class="cta-sub">I'm currently open to Product Design and UX/UI opportunities. If you're building a product, improving an existing experience, or looking for a designer who enjoys working through complex problems, I'd be happy to talk.</p>
   </div>
   <div class="cta-btns">
     <a href="Homepage/source/Rahul_6374761540.pdf" download="rahul_6374761540.pdf" class="btn-primary" >Download Resume</a>
-
+    <a href="mailto:rahuluiux010@gmail.com" class="btn-secondary">Get in Touch</a>
   </div>
 </div>
 
@@ -894,7 +893,7 @@
   <div class="footer-top">
     <div class="footer-brand">
       <div class="logo">Rahul</div>
-      <p>Designing meaningful digital experiences that make a difference.</p>
+      <p>Product Designer<br>UX · Product Design · UI</p>
     </div>
     <div class="footer-col">
       <h4>Quick Links</h4>
@@ -902,18 +901,17 @@
         <li><a href="#hero">Home</a></li>
         <li><a href="#work">Work</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#process">Process</a></li>
         <li><a href="#experience">Experience</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Services</h4>
+      <h4>Skills</h4>
       <ul>
-        <li><a href="#">Product Design</a></li>
-        <li><a href="#">UI/UX Design</a></li>
-        <li><a href="#">Design Systems</a></li>
-        <li><a href="#">Prototypes</a></li>
-        <li><a href="#">User Research</a></li>
+        <li><a href="#skills">Product Design</a></li>
+        <li><a href="#skills">UX Research</a></li>
+        <li><a href="#skills">Interaction Design</a></li>
+        <li><a href="#skills">UI Systems</a></li>
+        <li><a href="#skills">Prototyping</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -926,13 +924,13 @@
       </ul>
     </div>
     <div class="footer-col footer-contact">
-      <h4>Let's Connect</h4>
+      <h4>Email</h4>
       <p>rahuluiux010@gmail.com</p>
       <p>+91 6374761540</p>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2024 Rahul.V. All rights reserved.</p>
+    <p>© 2026 Rahul.V. All rights reserved.</p>
     <div class="social-links">
       <a href="#" class="social-btn">in</a>
       <a href="#" class="social-btn">Be</a>
