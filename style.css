@@ -117,6 +117,10 @@
   .hero-stat-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 20px; text-align: center; min-width: 130px; width: 140px; height: 84px; backdrop-filter: blur(8px); display: flex; flex-direction: column; align-items: center; justify-content: center; }
   .hero-stat-card .num { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; color: var(--text); }
   .hero-stat-card .label { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+<<<<<<< HEAD
+=======
+  #featured { display: none; }
+>>>>>>> 67dd37b74d3b7c650787dc1d55c4542fa0ab2d24
 
   /* TRUST BAR */
   .trust-bar { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 28px 48px; display: flex; align-items: center; gap: 40px; flex-wrap: wrap; overflow: hidden; }
