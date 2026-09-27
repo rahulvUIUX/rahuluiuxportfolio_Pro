@@ -59,6 +59,60 @@
     });
   }
 
+  const workGrid = document.getElementById('workGrid');
+  const workCards = workGrid ? Array.from(workGrid.querySelectorAll('.work-card')) : [];
+  const workFilters = Array.from(document.querySelectorAll('.work-filter'));
+  const selectedWorkFilters = new Set(workFilters.filter(filter => filter.getAttribute('aria-pressed') === 'true').map(filter => filter.dataset.filter));
+  const workEmptyMessage = document.getElementById('workEmpty');
+  const loadMoreButton = document.getElementById('loadMoreWork');
+  let workCardsExpanded = false;
+
+  function updateWorkCards() {
+    let matchingCardCount = 0;
+    let matchingExtraCardCount = 0;
+
+    workCards.forEach(card => {
+      const categories = (card.dataset.categories || '').split(/\s+/);
+      const matchesFilter = selectedWorkFilters.size === 0 || categories.some(category => selectedWorkFilters.has(category));
+      const isExtraCard = card.hasAttribute('data-extra-card');
+      card.hidden = !matchesFilter || (isExtraCard && !workCardsExpanded);
+
+      if (matchesFilter) {
+        matchingCardCount++;
+        if (isExtraCard) matchingExtraCardCount++;
+      }
+    });
+
+    if (workEmptyMessage) workEmptyMessage.hidden = matchingCardCount > 0;
+    if (loadMoreButton) {
+      loadMoreButton.hidden = matchingExtraCardCount === 0;
+      loadMoreButton.setAttribute('aria-expanded', String(workCardsExpanded));
+      loadMoreButton.querySelector('.load-more-label').textContent = workCardsExpanded ? 'Show less' : 'Load more';
+      loadMoreButton.querySelector('.load-more-arrow').textContent = workCardsExpanded ? '↑' : '↓';
+    }
+  }
+
+  workFilters.forEach(filter => {
+    filter.addEventListener('click', () => {
+      const category = filter.dataset.filter;
+      const isSelected = selectedWorkFilters.has(category);
+      if (isSelected) selectedWorkFilters.delete(category);
+      else selectedWorkFilters.add(category);
+      filter.setAttribute('aria-pressed', String(!isSelected));
+      workCardsExpanded = false;
+      updateWorkCards();
+    });
+  });
+
+  if (loadMoreButton) {
+    loadMoreButton.addEventListener('click', () => {
+      workCardsExpanded = !workCardsExpanded;
+      updateWorkCards();
+    });
+  }
+
+  updateWorkCards();
+
   // Start typewriter animation
   type();
 
