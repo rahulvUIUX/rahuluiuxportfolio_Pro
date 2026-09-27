@@ -2,6 +2,7 @@
   const roles = ['Sole UI/UX Designer', 'Product Designer'];
   const el = document.getElementById('typewriter');
   let roleIndex = 0, charIndex = 0, isDeleting = false;
+  let animationDone = false;
 
   // THEME TOGGLE
   const html = document.documentElement;
@@ -119,6 +120,16 @@
   // ACTIVE NAV LINK
   const sections = document.querySelectorAll('section, .cta-section');
   const navLinks = document.querySelectorAll('.nav-links a');
+  const scrollProgress = document.getElementById('scrollProgress');
+  function updateScrollProgress() {
+    if (!scrollProgress) return;
+    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollableHeight > 0 ? Math.min(window.scrollY / scrollableHeight, 1) : 0;
+    scrollProgress.style.setProperty('--scroll-progress', progress);
+    scrollProgress.style.setProperty('--scroll-marker-y', `${progress * scrollProgress.clientHeight}px`);
+    scrollProgress.setAttribute('aria-valuenow', String(Math.round(progress * 100)));
+  }
+
   window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(s => {
@@ -128,7 +139,10 @@
       a.classList.remove('active');
       if (a.getAttribute('href') === '#' + current) a.classList.add('active');
     });
+    updateScrollProgress();
   });
+  window.addEventListener('resize', updateScrollProgress);
+  updateScrollProgress();
 
   // BACK TO TOP
   const backTop = document.querySelector('.back-top');
@@ -138,18 +152,65 @@
   });
   backTop.style.opacity = '0';
 
-  // SCROLL ANIMATIONS
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.transform = 'translateY(0)';
-        e.target.style.opacity = '1';
+  // PAGE REVEALS
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+    function animateMetric(element) {
+      const originalValue = element.textContent.trim();
+      const match = originalValue.match(/^([+\-−]?)(\d+)(.*)$/);
+      if (!match) return;
+
+      const [, prefix, numberText, suffix] = match;
+      const targetValue = Number(numberText);
+      const startTime = performance.now();
+      const duration = 900;
+
+      function updateMetric(currentTime) {
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        element.textContent = `${prefix}${Math.round(targetValue * easedProgress)}${suffix}`;
+        if (progress < 1) requestAnimationFrame(updateMetric);
+        else element.textContent = originalValue;
       }
+
+      requestAnimationFrame(updateMetric);
+    }
+
+    const revealTargets = document.querySelectorAll([
+      '#hero .hero-eyebrow', '#hero .hero-h1', '#hero .hero-desc', '#hero .hero-actions a', '#hero .hero-image img',
+      '.trust-intro', '.trust-stat',
+      '#services .section-row', '#services .service-card',
+      '#work .section-row', '#work > .case-desc', '#work .work-card',
+      '.impact-heading', '.impact-card', '.impact-process-label', '.impact-steps li',
+      '.about-photo', '.about-text', '.about-panel',
+      '#skills .skills-group-title', '#skills .skill-category', '#skills .tool-row',
+      '#experience > .section-eyebrow', '#experience .exp-card',
+      '.cta-copy', '.cta-btns', 'footer .footer-brand', 'footer .footer-col', 'footer .footer-bottom'
+    ].join(', '));
+
+    revealTargets.forEach((element, index) => {
+      element.setAttribute('data-reveal', '');
+      const heroButtonIndex = element.matches('#hero .hero-actions a')
+        ? Array.from(element.parentElement.children).indexOf(element)
+        : -1;
+      const revealDelay = heroButtonIndex >= 0 ? 300 + heroButtonIndex * 100 : (index % 4) * 70;
+      element.style.setProperty('--reveal-delay', `${revealDelay}ms`);
     });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.work-card, .highlight-card, .exp-card, .testi-card').forEach(el => {
-    el.style.transform = 'translateY(20px)';
-    el.style.opacity = '0';
-    el.style.transition = 'transform 0.5s ease, opacity 0.5s ease, background-color 0.35s ease, border-color 0.35s ease';
-    observer.observe(el);
-  });
+
+    if (revealTargets.length) {
+      document.documentElement.classList.add('motion-ready');
+      const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            if (entry.target.matches('.trust-stat, .impact-card')) {
+              entry.target.querySelectorAll('.n, .impact-metric:not(.impact-metric-text)').forEach(animateMetric);
+            }
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -24px 0px' });
+
+      revealTargets.forEach(element => revealObserver.observe(element));
+    }
+  }
